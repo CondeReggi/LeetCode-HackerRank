@@ -52,4 +52,24 @@ public class Solution {
             return 0;
         }
     }
+    
+    public int MyAtoi(string s) {
+        s = s.Trim();
+
+        if(s.Length == 0) return 0;
+
+        int result = 0;
+        int counter = 0;
+        bool isNegative = false;
+        for(int i = 0; i < s.Length; i++){
+            int number;
+            if(s[i].ToString() == "-") isNegative = true;
+
+            if(int.TryParse(s[i].ToString(), out number)){
+                result = (result * 10) + number;
+                counter++;
+            }
+        }
+        return isNegative ? -result : result;
+    }
 }
