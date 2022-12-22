@@ -1,4 +1,4 @@
-public class AddTwoNumbersSolution {
+public class Solution {
     public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
         string a = ""; 
         string b = "";
@@ -27,5 +27,29 @@ public class AddTwoNumbersSolution {
             }
         }
         return result;
+    }
+    
+    public int Reverse(int x) {
+        try{
+            bool isNegative = x < 0;
+
+            Stack<char> pila = new Stack<char>();
+            string numero = x.ToString();
+
+            int index = isNegative ? 1 : 0;
+
+            for(int i = index; i < numero.Length ; i++){
+                pila.Push(numero[i]);
+            }
+            numero = "";
+            while(pila.Count > 0){
+                numero += pila.Pop();
+            }
+            int result = Int32.Parse(numero);
+
+            return isNegative ? (-1) * result : result;
+        }catch(Exception ex){ //Caso de que sea > Int32
+            return 0;
+        }
     }
 }
