@@ -72,4 +72,59 @@ public class Solution {
         }
         return isNegative ? -result : result;
     }
+    
+    public int RomanToInt(string s) {
+        Dictionary<string, int> valores = Diccionario();
+        int sum = 0;
+        for(int i = 0; i < s.Length ; i++){
+            char currentRomanChar = s[i];
+
+            if (i + 1 < s.Length && valores[s[i + 1].ToString()] > valores[currentRomanChar.ToString()])
+            {
+                sum -= valores[currentRomanChar.ToString()];
+            }
+            else
+            {
+                sum += valores[currentRomanChar.ToString()];
+            }
+        }
+        return sum;
+    }
+
+    public Dictionary<string, int> Diccionario(){
+        Dictionary<string, int> valores = new Dictionary<string, int>();
+        valores.Add("I",1);
+        valores.Add("V",5);
+        valores.Add("X",10);
+        valores.Add("L",50);
+        valores.Add("C",100);
+        valores.Add("D",500);
+        valores.Add("M",1000);
+        return valores;
+    }
+    
+    public string LongestCommonPrefix(string[] strs) {
+        string result = "";
+        var minimo = strs.ToList().Select(x => x.Length).Min();
+
+        for(int i = 0; i < minimo; i++){
+            bool esta_en_todos = true;
+            char value = strs[0][i];
+
+            for(int j = 0; j < strs.Length; j++){
+                if(value != strs[j][i]){
+                    esta_en_todos = false;
+                    break;
+                }
+            }
+            if(esta_en_todos){
+                result += strs[0][i].ToString();
+            }else{
+                break;
+            }
+        }
+        return result;
+    }
+    
+    
 }
