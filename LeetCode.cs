@@ -126,5 +126,41 @@ public class Solution {
         return result;
     }
     
+    public bool IsSameTree(TreeNode p, TreeNode q) {
+        if(q == null && p != null) return false;
+        if(p == null && q != null) return false;
+        if(q == null && p == null) return true;
+        
+        if(p.val != q.val) return false;
+
+        bool left = IsSameTree(p.left , q.left);
+        bool right = IsSameTree(p.right , q.right);
+
+        return left && right;
+    }
     
+    public bool IsSymmetric(TreeNode root) {
+        if(root.left == null && root.right != null) return false;
+        if(root.left != null && root.right == null) return false;
+
+        return CompareTwoTrees(root.left, root.right);
+    }
+
+    public bool CompareTwoTrees(TreeNode one, TreeNode two){
+        if(one == null && two == null) return true;
+
+        if(one.val != two.val) return false;
+
+        if(one.left == null && two.right != null) return false;
+        if(one.left != null && two.right == null) return false;
+        if(one.right == null && two.left != null) return false;
+        if(one.right != null && two.left == null) return false;
+
+        return CompareTwoTrees(one.left, two.right) && CompareTwoTrees(one.right, two.left);
+    }
+    
+    public int MaxDepth(TreeNode root) {
+        if(root == null) return 0;
+        return 1 + Math.Max(MaxDepth(root.left), MaxDepth(root.right));
+    }
 }
