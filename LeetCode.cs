@@ -163,4 +163,21 @@ public class Solution {
         if(root == null) return 0;
         return 1 + Math.Max(MaxDepth(root.left), MaxDepth(root.right));
     }
+    
+    public List<int> InorderTraversal(TreeNode root) {
+        List<int> res = new List<int>();
+        InorderTraversalAux(root, res);
+
+        return res;
+    }
+
+    public void InorderTraversalAux(TreeNode root, IList<int> aux){
+        if(root == null) return;
+
+        InorderTraversalAux(root.left, aux);
+        aux.Add(root.val);
+        InorderTraversalAux(root.right, aux);
+    }
+    
+    
 }
