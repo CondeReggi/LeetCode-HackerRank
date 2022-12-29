@@ -179,5 +179,30 @@ public class Solution {
         InorderTraversalAux(root.right, aux);
     }
     
+    public int[] PlusOne(int[] digits) {
+        var str = (Int32.Parse(String.Join(string.Empty, digits)) + 1).ToString();
+        List<int> result = new List<int>();
+
+        for(int i = 0; i < str.Length ;i++){
+            result.Add(Int32.Parse(str[i].ToString()));
+        }
+        
+        return result.ToArray();
+    }
     
+    public int MySqrt(int x) {
+        return Convert.ToInt32(Math.Floor(Math.Sqrt(x)));
+    }
+    
+    public ListNode DeleteDuplicates(ListNode head) {
+        ListNode aux = head;
+        while(aux != null && aux.next != null){
+            if(aux.val == aux.next.val){
+                aux.next = aux.next.next;
+            }else{
+                aux = aux.next;
+            }
+        }
+        return head;
+    }
 }
