@@ -211,5 +211,19 @@ public class Solution {
         return strlist[strlist.Length - 1].Length;
     }
     
-    
+    public bool HasCycle(ListNode head) {
+        Dictionary<int, bool> values = new Dictionary<int, bool>();
+        if(head == null) return false;
+        ListNode aux = head;
+
+        while(aux != null){
+            if(values.ContainsKey(aux.val)){
+                return true;
+            }else{
+                values.Add(aux.val, true);
+            }
+            aux = aux.next;
+        }
+        return false;
+    }
 }
