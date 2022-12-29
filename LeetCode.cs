@@ -205,4 +205,11 @@ public class Solution {
         }
         return head;
     }
+    
+    public int LengthOfLastWord(string s) {
+        String[] strlist = s.Trim().Split(' ');
+        return strlist[strlist.Length - 1].Length;
+    }
+    
+    
 }
