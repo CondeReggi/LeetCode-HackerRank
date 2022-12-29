@@ -226,4 +226,68 @@ public class Solution {
         }
         return false;
     }
+    
+    public int SingleNumber(int[] nums) {
+        Dictionary<int, int> values = new Dictionary<int, int>();
+
+        foreach(var number in nums){
+            if(values.ContainsKey(number)){
+                values[number] = values[number] + 1;
+            }else{
+                values[number] = 1;
+            }
+        }
+        int valor = 0;
+        
+        foreach(KeyValuePair<int, int> entry in values)
+        {
+            if(values[entry.Key] == 1){
+                valor = entry.Key;
+            }
+        }
+        return valor;
+    }
+    
+    public bool IsPalindrome(string s) {
+        string result = "";
+        for(int i = 0; i < s.Length; i++){
+            if(Regex.IsMatch(s[i].ToString(), @"^[a-zA-Z0-9]+$")) result += s[i];
+        }
+
+        result = result.ToLower();
+
+        for(int j = 0; j < Math.Floor((double)result.Length/2) ;j++){
+            if(result[j] != result[result.Length - 1 - j]) return false;
+        }
+
+        return true;
+    }
+    
+    public IList<int> PreorderTraversal(TreeNode root) {
+        List<int> res = new List<int>();
+        PreorderTraversalAux(root, res);
+        return res;
+    }
+
+    public void PreorderTraversalAux(TreeNode root, List<int> aux) {
+        if(root != null){
+            aux.Add(root.val);
+            PreorderTraversalAux(root.left, aux);
+            PreorderTraversalAux(root.right, aux);
+        }
+    }
+    
+    public IList<int> PostorderTraversal(TreeNode root) {
+        List<int> res = new List<int>();
+        PostorderTraversalAux(root, res);
+        return res;
+    }
+
+    public void PostorderTraversalAux(TreeNode root, List<int> aux) {
+        if(root != null){
+            PostorderTraversalAux(root.left, aux);
+            PostorderTraversalAux(root.right, aux);
+            aux.Add(root.val);
+        }
+    }
 }
