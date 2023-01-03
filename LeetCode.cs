@@ -290,4 +290,61 @@ public class Solution {
             aux.Add(root.val);
         }
     }
+    
+    public ListNode RemoveElements(ListNode head, int val) {
+        while (head != null && head.val == val) { //Me muevo todos para adelante si es necesario
+            head = head.next;
+        }
+
+        if (head == null) { //Si es null return null
+            return null;
+        }
+
+        var aux = head; //Auxiliar
+        while(aux.next != null){
+            ListNode iter = aux.next; //El siguiente ya que es no null
+
+            if(iter.val == val){
+                aux.next = iter.next;
+            }else{
+                aux = aux.next;
+            }
+        }
+        return head;
+    }
+    
+    public ListNode ReverseList(ListNode head) {
+        ListNode newHead = null;
+            while(head!=null)
+            {
+                ListNode next = head.next;
+                head.next = newHead;
+                newHead = head;
+                head = next;
+            }
+            return newHead;
+    }
+    
+    public bool ContainsDuplicate(int[] nums) {
+        Dictionary<int, int> values = new Dictionary<int, int>();
+        for(int i = 0; i < nums.Length; i++){
+            if(values.ContainsKey(nums[i])){
+                return true;
+            }else{
+                values[nums[i]] = 1;
+            }
+        }
+        return false;
+    }
+    
+    public bool ContainsNearbyDuplicate(int[] nums, int k) {
+        foreach(var num in nums){
+            var i = Array.LastIndexOf(nums, num);
+            var j = Array.IndexOf(nums, num);
+            if(i == j && Math.Abs(i - j) <= k){
+                return true;
+            }
+        }
+        return false;
+    }
 }
