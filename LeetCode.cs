@@ -347,4 +347,39 @@ public class Solution {
         }
         return false;
     }
+    
+    public bool IsValid(string s) {
+        int i = 0;
+        bool correcto = true;
+
+        List<char> entradas = new List<char>(){
+            '(','[','{'
+        };
+
+        List<char> salidas = new List<char>() {
+            ')',']','}'
+        };
+
+        var pila = new Stack<char>();
+
+        while(correcto && i < s.Length){
+            Console.WriteLine(s[i]);
+            if(entradas.Contains(s[i])){
+                pila.Push(s[i]);
+            }else if(salidas.Contains(s[i])){
+                if(pila.Count > 0){
+                    var ultimo = pila.Peek();
+                    if((ultimo == '(' && s[i] == ')') || (ultimo == '[' && s[i] == ']') || (ultimo == '{' && s[i] == '}')){
+                        pila.Pop();
+                    }else{
+                        correcto = false;
+                    }
+                }else{
+                    correcto = false;
+                }
+            }
+            i++;
+        }
+        return correcto && (pila.Count == 0);
+    }
 }
